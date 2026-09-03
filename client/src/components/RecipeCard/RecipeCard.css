@@ -1,0 +1,20 @@
+.card {
+    background-color: #ffff;
+}
+
+.title {
+    font-size:18px;
+    color: #1b1b1b;
+}
+
+.image {
+    width:25%
+}
+
+.tags {
+    font-size:14px;
+}
+
+.description{
+    font-size:14px;
+}

@@ -2,7 +2,15 @@
 import "./RecipesPage.css";
 import { useState } from "react";
 import type { ChangeEvent } from "react";
+import RecipeCard, {type CardInfo }from "../../components/RecipeCard/RecipeCard"
 
+
+const mockRecipe: CardInfo = {
+    title: "Steak baby!",
+    description: "crunch romaine",
+    image: "https://cdn.loveandlemons.com/wp-content/uploads/2024/12/caesar-salad.jpg",
+    tags:["vegan", "salad", "healthy"]
+}
 
 //for arguments if needed, placeholder for now
 type RecipesPageProps = {
@@ -35,9 +43,8 @@ export default function RecipePage({}: RecipesPageProps) {
         </div>
         
         <div className="recipe-cards">
-            <p className="recipe-grid-temp">
-                Recipe Cards
-            </p>
+             <RecipeCard recipe={mockRecipe}/>
+  
         </div> 
         
     </div>

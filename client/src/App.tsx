@@ -8,6 +8,8 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 
 import AIAssitant from "./pages/AIAssistant/AIAssistant";
 import RecipePage from "./pages/RecipesPage/RecipesPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import SignUpPage from "./pages/SignupPage/SignupPage";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/ai-assistant" element={<AIAssitant/>}/>
         <Route path="/recipes" element={<RecipePage/>}/>
+        <Route path="/login" element={<LoginPage handleSignUpOrLogin={() => console.log("Logged in")}/>}/>
+        <Route path="/signup" element={<SignUpPage handleSignUpOrLogin={() => console.log("Signed up")}/>}/>
       </Routes>
   );
 }
