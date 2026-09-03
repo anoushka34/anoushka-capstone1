@@ -21,3 +21,6 @@ app.use("/api/recipes", require("./routes/recipes"));
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+//add the following line to register the api 
+app.use('/api/ai', require('./routes/ai'));
