@@ -7,6 +7,7 @@ import "./App.css";
 import LandingPage from "./pages/LandingPage/LandingPage";
 
 import AIAssitant from "./pages/AIAssistant/AIAssistant";
+import RecipePage from "./pages/RecipesPage/RecipesPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
   
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/ai-assistant" element={<AIAssitant/>}/>
+        <Route path="/recipes" element={<RecipePage/>}/>
       </Routes>
   );
 }

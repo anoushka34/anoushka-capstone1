@@ -1,0 +1,47 @@
+.recipes-page {
+    font-family: 'Open Sans';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFF;
+}
+
+.recipes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+.recipes-home {
+    font-size: 24px;
+    color: #1b1b1b;
+    align-items: center;
+}
+
+.recipe-search {
+    font-size: 16px;
+    color: #707070;
+}
+
+.recipe-search {
+    margin-bottom: 20px;
+    width:100%;
+}
+
+.search-input {
+    font-family: 'Open Sans';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFF;
+}
+
+.recipe-cards {
+    display:grid;
+}
+
+.recipe-grid-temp {
+    font-size:14px;
+}
