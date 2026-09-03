@@ -26,7 +26,7 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
 
     try {
       handleSignUpOrLogin();
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       console.log(err);
       setError("check terminal and console");
