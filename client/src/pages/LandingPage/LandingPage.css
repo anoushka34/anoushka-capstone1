@@ -3,13 +3,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f2bcbc;
+    background-color: #FFFF;
 }
 
 .landing-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 
@@ -24,27 +25,19 @@
     color: #707070;
 }
 
-.landing-routes{
-    display:flex;
-    align-items:center;
-}
-
-.login-btn {
-  width: 100%;
-  padding: 10px;
-  background-color: #6a0dad; /* Purple color */
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
+.explore-recipes-btn, .login-btn{
+    display:inline-flexbox;
+    justify-content: center;
+    align-items: center;
+    font-size:14px;
 }
 
 .explore-recipes-btn {
-  width: 100%;
-  padding: 10px;
-  background-color: #6a0dad; /* Purple color */
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
+    background-color: #6ba539;
+    color:#FFFF
+}
+
+.login-btn {
+    background-color: #fbeabf;
+    color:#866208;
 }

@@ -27,7 +27,7 @@ export default function LandingPage({}: LandingPageProps) {
     return (
     <div className="landing-page">
       <div className="landing-container">
-        //NOT COMPLETE: find a way to insert the icon/logo later
+        {/*NOT COMPLETE: find a way to insert the icon/logo later*/}
         <h1 className="landing-home">Spoonful</h1>
             <p 
                 className="landing-description">Discover new recipes!
