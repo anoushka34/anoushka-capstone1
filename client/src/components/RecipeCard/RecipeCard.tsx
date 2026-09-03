@@ -19,6 +19,7 @@
 // }
 
 import "./RecipeCard.css"
+import { Link } from 'react-router-dom';
 
 //use interface to list out what is needed in the Recipe Card
 
@@ -42,12 +43,14 @@ type RecipeCardProps = {
 
 function RecipeCard({recipe}: RecipeCardProps) {
   return (
-    <div className="card">
-      <h1 className="title">{recipe.title}</h1>
-      <h2 className="description">{recipe.description}</h2>
-      <img className="image" src={recipe.image} alt={recipe.title}/>
-      <h3 className="tags">{recipe.tags.join(', ')}</h3>
-    </div>
+    <Link to="/recipes/1" style={{textDecoration:"none", color:"inherit"}}>
+      <div className="card">
+        <h1 className="title">{recipe.title}</h1>
+        <h2 className="description">{recipe.description}</h2>
+        <img className="image" src={recipe.image} alt={recipe.title}/>
+        <h3 className="tags">{recipe.tags.join(', ')}</h3>
+      </div>
+    </Link>
   );
 }
 

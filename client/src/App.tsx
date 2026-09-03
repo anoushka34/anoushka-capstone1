@@ -10,6 +10,7 @@ import AIAssitant from "./pages/AIAssistant/AIAssistant";
 import RecipePage from "./pages/RecipesPage/RecipesPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignupPage/SignupPage";
+import RecipeDetails from "./pages/RecipeDetails/RecipeDetails";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/recipes" element={<RecipePage/>}/>
         <Route path="/login" element={<LoginPage handleSignUpOrLogin={() => console.log("Logged in")}/>}/>
         <Route path="/signup" element={<SignUpPage handleSignUpOrLogin={() => console.log("Signed up")}/>}/>
+        <Route path="/recipes/:id" element={<RecipeDetails/>}/>
       </Routes>
   );
 }
