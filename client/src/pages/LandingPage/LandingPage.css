@@ -26,7 +26,7 @@
 }
 
 .explore-recipes-btn, .login-btn{
-    display:inline-flexbox;
+    display:inline-flex;
     justify-content: center;
     align-items: center;
     font-size:14px;

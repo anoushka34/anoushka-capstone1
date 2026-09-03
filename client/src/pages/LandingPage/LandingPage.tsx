@@ -36,7 +36,7 @@ export default function LandingPage({}: LandingPageProps) {
         <div className="landing-routes">
             <button 
                 type="button"
-                className="exlpore-recipes-btn"
+                className="explore-recipes-btn"
                 onClick={handleExploreRecipes}
             >
                 Explore Recipes
