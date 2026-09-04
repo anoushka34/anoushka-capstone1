@@ -4,13 +4,12 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo.png";
 
 
-//for arguments if needed, placeholder for now
 type LandingPageProps = {
-
+  isLoggedIn: boolean;
 };
 
 
-export default function LandingPage({ }: LandingPageProps) {
+export default function LandingPage({ isLoggedIn }: LandingPageProps) {
   //this will do the path following parth
   const navigate = useNavigate();
 
@@ -23,6 +22,10 @@ export default function LandingPage({ }: LandingPageProps) {
   function handleLogin() {
     //if the login buttin is clicked, go to the login page
     navigate("/login");
+  }
+
+  function handleDashboard() {
+    navigate("/dashboard");
   }
 
   return (
@@ -41,13 +44,23 @@ export default function LandingPage({ }: LandingPageProps) {
             Explore Recipes
           </button>
 
-          <button
-            type="button"
-            className="login-btn"
-            onClick={handleLogin}
-          >
-            Login
-          </button>
+          {isLoggedIn ? (
+            <button
+              type="button"
+              className="login-btn"
+              onClick={handleDashboard}
+            >
+              Go to Dashboard
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="login-btn"
+              onClick={handleLogin}
+            >
+              Login
+            </button>
+          )}
         </div>
       </div>
     </div>
