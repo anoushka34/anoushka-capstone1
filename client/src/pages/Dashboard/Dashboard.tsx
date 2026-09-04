@@ -32,7 +32,7 @@ function Dashboard() {
 
     const handleSave=(recipeData:any) => {
         const token = localStorage.getItem("token");
-        const config = {headers: {Authorizaton: `Bearer ${token}`}};
+        const config = {headers: {Authorization: `Bearer ${token}`}};
         if(editingR)  {
             const id= editingR._id || editingR.id;
             axios
@@ -47,7 +47,7 @@ function Dashboard() {
         }
         else {
             axios
-                .post(`http://localhost:3000/api/recipes`, recipeData)
+                .post(`http://localhost:3000/api/recipes`, recipeData, config)
                 .then(() => {
                     loadRecipes();
                 })
@@ -65,7 +65,7 @@ function Dashboard() {
     const handleDelete = (id: string) => {
         if(window.confirm("Delete this recipe?")) {
             const token = localStorage.getItem("token");
-            const config = {headers: {Authorizaton: `Bearer ${token}`}};
+            const config = {headers: {Authorization: `Bearer ${token}`}};
             axios.delete(`http://localhost:3000/api/recipes/${id}`)
                 .then(()=> {
                     if(editingR && (editingR._id == id || editingR.id == id)) {
