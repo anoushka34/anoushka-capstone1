@@ -17,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/users", require("./routes/users"));
 app.use("/api/recipes", require("./routes/recipes"));
+
 //add the following line to register the api 
 app.use('/api/ai', require('./routes/ai'));
 

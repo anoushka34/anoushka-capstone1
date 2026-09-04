@@ -122,6 +122,9 @@ async function deleteOne(req, res) {
     if (recipe == null) {
       return res.status(404).json({ message: "Cannot find recipe" });
     }
+    console.log("recipe.ownerId:", recipe.ownerId.toString());
+    console.log("req.user._id:", req.user._id);
+    console.log("types match:", typeof recipe.ownerId.toString(), typeof req.user._id);
     if (recipe.ownerId.toString() !== req.user._id) {
       return res.status(403).json({ message: "Unauthorized" });
     }
