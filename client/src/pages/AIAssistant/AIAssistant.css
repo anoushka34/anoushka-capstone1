@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+.ai-page {
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.ai-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+.ai-heading {
+  font-size: 40px;
+  font-weight: 700;
+  color: #1B1B1B;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.ai-subheading {
+  font-size: 16px;
+  color: #707070;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.ai-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B1B1B;
+  margin-bottom: 4px;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  padding: 10px 12px;
+  border: 1px solid #B0B0B0;
+  border-radius: 8px;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #57852F;
+}
+
+.ai-textarea {
+  min-height: 90px;
+  resize: vertical;
+  margin-bottom: 16px;
+}
+
+.btn-primary {
+  align-self: flex-start;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 20px;
+  background-color: #57852F;
+  color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #6BA539;
+}
+
+.btn-primary:disabled {
+  background-color: #B0B0B0;
+  cursor: not-allowed;
+}
+
+.ai-error {
+  color: #C62828;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.ai-loading {
+  color: #707070;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.ai-response-card {
+  background-color: #FFFFFF;
+  border: 1px solid #F5F5F5;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin-bottom: 32px;
+}
+
+.ai-response-tag {
+  display: inline-block;
+  background-color: #FBEABF;
+  color: #866208;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.ai-response-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1B1B1B;
+  margin: 0;
+}
+
+.ai-history-heading {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1B1B1B;
+  margin-bottom: 16px;
+}
+
+.ai-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ai-history-card {
+  background-color: #FFFFFF;
+  border: 1px solid #F5F5F5;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 16px 20px;
+}
+
+.ai-history-question {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1B1B1B;
+  margin: 0 0 6px 0;
+}
+
+.ai-history-answer {
+  font-size: 14px;
+  color: #707070;
+  line-height: 1.5;
+  margin: 0;
+}

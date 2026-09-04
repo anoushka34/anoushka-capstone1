@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import "./AIAssistant.css";
 
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
@@ -6,6 +7,17 @@ const BACKEND_URL =
 interface HistoryItem {
   prompt: string;
   answer: string;
+}
+
+// Converts basic **bold** markdown into JSX bold elements.
+function renderWithBold(text: string) {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+    return <span key={index}>{part}</span>;
+  });
 }
 
 function AIAssistant() {
@@ -100,44 +112,55 @@ function AIAssistant() {
   };
 
   return (
-    <div>
-      <h1>AI Assistant</h1>
+    <div className="ai-page">
+      <div className="ai-container">
+        <h1 className="ai-heading">AI Assistant</h1>
+        <p className="ai-subheading">Ask a cooking question and get an instant answer</p>
 
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Ask something..."
-          disabled={isLoading}
-        />
+        <form className="ai-form" onSubmit={handleSubmit}>
+          <label className="form-label">Your Question</label>
+          <textarea
+            className="form-input ai-textarea"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Ask something..."
+            disabled={isLoading}
+          />
 
-        <button
-          type="submit"
-          disabled={isLoading || !prompt.trim()}
-        >
-          {isLoading ? 'Generating...' : 'Submit'}
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="btn-primary"
+            disabled={isLoading || !prompt.trim()}
+          >
+            {isLoading ? 'Generating...' : 'Submit'}
+          </button>
+        </form>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p className="ai-error">{error}</p>}
 
-      {isLoading && !response && <p>Gemini is thinking...</p>}
+        {isLoading && !response && <p className="ai-loading">Gemini is thinking...</p>}
 
-      {response && (
-        <pre style={{ whiteSpace: 'pre-wrap' }}>
-          {response}
-        </pre>
-      )}
+        {response && (
+          <div className="ai-response-card">
+            <span className="ai-response-tag">Answer</span>
+            <p className="ai-response-text">{renderWithBold(response)}</p>
+          </div>
+        )}
 
-      <h3>Recent History</h3>
-
-      {history.map((h, i) => (
-        <div key={i}>
-          <strong>Q:</strong> {h.prompt}
-          <br />
-          <strong>A:</strong> {h.answer}
-        </div>
-      ))}
+        {history.length > 0 && (
+          <div className="ai-history">
+            <h2 className="ai-history-heading">Recent History</h2>
+            <div className="ai-history-list">
+              {history.map((h, i) => (
+                <div key={i} className="ai-history-card">
+                  <p className="ai-history-question">{h.prompt}</p>
+                  <p className="ai-history-answer">{renderWithBold(h.answer)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

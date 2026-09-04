@@ -22,6 +22,7 @@ export default function Navbar({ isLoggedIn, onLogout }: NavbarProps) {
       </Link>
       <div className="navbar-links">
         <Link to="/recipes">Explore Recipes</Link>
+        <Link to="/ai-assistant">AI Assistant</Link>
         {isLoggedIn ? (
           <>
             <Link to="/dashboard">Dashboard</Link>
