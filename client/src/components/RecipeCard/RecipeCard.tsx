@@ -30,11 +30,12 @@ import { Link } from 'react-router-dom';
 //   type: ToastMessageType;
 // }
 export interface CardInfo {
+    _id?:string;
+    id?:string;
     title: string;
     description: string;
     image:string;
-    tags: string[]
-
+    tags?: string[] | string
 }
 
 type RecipeCardProps = {
@@ -42,13 +43,15 @@ type RecipeCardProps = {
 };
 
 function RecipeCard({recipe}: RecipeCardProps) {
+  const recipeId = recipe._id || recipe.id
+  const tagsShown = Array.isArray(recipe.tags) ? recipe.tags.join(", "): recipe.tags|| "";
   return (
-    <Link to="/recipes/1" style={{textDecoration:"none", color:"inherit"}}>
+    <Link to={`/recipes/${recipeId}`} style={{textDecoration:"none", color:"inherit"}}>
       <div className="card">
         <h1 className="title">{recipe.title}</h1>
         <h2 className="description">{recipe.description}</h2>
         <img className="image" src={recipe.image} alt={recipe.title}/>
-        <h3 className="tags">{recipe.tags.join(', ')}</h3>
+        {tagsShown && <h3 className="tags">{tagsShown}</h3>}
       </div>
     </Link>
   );

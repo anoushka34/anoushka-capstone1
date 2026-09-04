@@ -4,7 +4,7 @@
 //          required field validation, success message when submitted, UI should
 //          be updated without reload
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 type FormFields = {
   title:string;
@@ -17,10 +17,12 @@ type FormFields = {
 
 type FormProps = {
     handleSubmit: (recipeData: FormFields) => void;
+    initialData?: any;
+    buttonText?: string;
 }
 
 
-function RecipeForm({ handleSubmit }: FormProps) {
+function RecipeForm({ handleSubmit, initialData, buttonText = "Create Recipe"}: FormProps) {
   const [formData, setFormData] = useState<FormFields>({
     title: '', 
     description: '', 
@@ -31,6 +33,30 @@ function RecipeForm({ handleSubmit }: FormProps) {
     
   });
 
+  useEffect (() => {
+    if(initialData) {
+      setFormData({
+        title:initialData.title || '', 
+        description: initialData.desctiption || '', 
+        image: initialData.image || '', 
+        ingredients : typeof initialData.ingredients == 'string' ? initialData.ingredients: JSON.stringify(initialData.ingredients || ''),
+        instructions : typeof initialData.instructions == 'string' ? initialData.instructions: JSON.stringify(initialData.instructions || ''),
+        tags : typeof initialData.tags == 'string' ? initialData.tags: JSON.stringify(initialData.tags || ''),
+      });
+    }
+
+    else {
+      setFormData({
+        title: '', 
+        description: '', 
+        image: '',
+        ingredients: '', 
+        instructions: '',
+        tags: '', 
+      });
+    }
+  }, [initialData]);
+  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({...formData, [event.target.name]: event.target.value, })
   };

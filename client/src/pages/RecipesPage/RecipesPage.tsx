@@ -1,30 +1,44 @@
 //LandingPage.tsx is meant to hold the outline of the first landing page that the user encounters
 import "./RecipesPage.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { ChangeEvent } from "react";
-import RecipeCard, {type CardInfo }from "../../components/RecipeCard/RecipeCard"
+import RecipeCard from "../../components/RecipeCard/RecipeCard"
+import axios from "axios"
 
 
-const mockRecipe: CardInfo = {
-    title: "Steak baby!",
-    description: "crunch romaine",
-    image: "https://cdn.loveandlemons.com/wp-content/uploads/2024/12/caesar-salad.jpg",
-    tags:["vegan", "salad", "healthy"]
-}
 
 //for arguments if needed, placeholder for now
-type RecipesPageProps = {
+// type RecipesPageProps = {
 
-};
+// };
 
 
-export default function RecipePage({}: RecipesPageProps) {
+export default function RecipePage() {
     //need the search feature in this, get from movies project
+    const [recipes, setRecipes] = useState<any[]>([])
     const [searchTerm, setSearchTerm] = useState('');
+
+    useEffect(() => {
+        axios.get(`http://localhost:3000/api/recipes/`).then((res)=>setRecipes(res.data)).catch((err)=>console.log(err));
+    }, []);
+
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setSearchTerm(e.target.value);
   }
+
+    function filterRecipes() {
+        if (searchTerm === "") {
+            return recipes;
+        }
+        
+        return recipes.filter(function(recipe) {
+            const title = recipe.title.toLowerCase();
+            const query = searchTerm.toLowerCase();
+            return title.includes(query);
+        });
+    }
+     const filtered = filterRecipes();
 
     //keep somewhat similar structure to landing page
     return (
@@ -43,7 +57,9 @@ export default function RecipePage({}: RecipesPageProps) {
         </div>
         
         <div className="recipe-cards">
-             <RecipeCard recipe={mockRecipe}/>
+            {filtered.map((recipe: any, index: number) => (
+                <RecipeCard key={recipe._id || recipe.id || index}  recipe={recipe}/>
+            ))}
   
         </div> 
         

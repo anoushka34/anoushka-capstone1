@@ -20,30 +20,35 @@
 
 
 
-import { Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
+
+import {useState, useEffect} from 'react';
+
+import axios from "axios";
 
 export default function RecipeDetails() {
+    const {id} = useParams();
+    const[recipe, setRecipe] = useState<any>(null);
+
+    useEffect(() => {
+        axios.get(`http://localhost:3000/api/recipes/${id}`).then((res)=>setRecipe(res.data)).catch((err)=>console.log(err));
+    }, [id]);
+    
+    if(!recipe) return <p>loading</p>
     return (
         <div>
-            <h1> 
-                Steak baby!
-            </h1>
+            <h1> {recipe.title}</h1>
 
-            <p>Crunchy romaine with creamy cashew Caesar dressing</p>
-""
-            <img src= "https://cdn.loveandlemons.com/wp-content/uploads/2024/12/caesar-salad.jpg" alt="Salad" />
-            <p>Tags: vegan salad, healthy </p>
+            <p>{recipe.description}</p>
+
+            <img src= {recipe.image} alt={recipe.title} />
+            <p>Tags: {recipe.tags} </p>
 
             <h2>Ingridents</h2>
-            <ul>
-                <li>Romaine lettuce</li>
-                <li>Cashews</li>
-            </ul>
+            <p>{recipe.ingredients}</p>
 
             <h2>Instructions</h2>
-            <ol>
-                <li>lend the cashews, lemon juice, mustard, and garlic until smooth</li>
-            </ol>
+            <p>{recipe.instructions}</p>
     
         </div>
     );
