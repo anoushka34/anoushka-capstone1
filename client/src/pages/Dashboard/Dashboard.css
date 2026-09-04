@@ -1,1 +1,18 @@
 import {useState: type ChangeEvent, type FormEvent} from 'react'
+
+.recipe-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.success-message {
+  background-color: #C1E0A6;
+  color: #57852F;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+  text-align: center;
+}

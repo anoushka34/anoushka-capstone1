@@ -19,12 +19,7 @@ export default function RecipePage() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/recipes/`)
-      .then((res) => {
-        console.log("API response:", res.data); // DEBUG
-        setRecipes(res.data);
-      })
-      .catch((err) => console.log("API error:", err)); // DEBUG
+    axios.get(`http://localhost:3000/api/recipes/`).then((res) => setRecipes(res.data)).catch((err) => console.log(err));
   }, []);
 
 
@@ -44,10 +39,6 @@ export default function RecipePage() {
   }
   const filtered = filterRecipes();
 
-  console.log("recipes state:", recipes); // DEBUG
-  console.log("searchTerm:", searchTerm); // DEBUG
-  console.log("filtered result:", filtered); // DEBUG
-
   //keep somewhat similar structure to landing page
   return (
     <div className="recipes-page">
@@ -63,11 +54,19 @@ export default function RecipePage() {
             className="search-input"
           />
         </div>
-        <div className="recipe-cards">
-          {filtered.map((recipe: any, index: number) => (
-            <RecipeCard key={recipe._id || recipe.id || index} recipe={recipe} />
-          ))}
-        </div>
+        {filtered.length === 0 ? (
+          <p className="no-results-message">
+            {searchTerm
+              ? `No recipes found matching "${searchTerm}"`
+              : "No recipes available yet"}
+          </p>
+        ) : (
+          <div className="recipe-cards">
+            {filtered.map((recipe: any, index: number) => (
+              <RecipeCard key={recipe._id || recipe.id || index} recipe={recipe} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

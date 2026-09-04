@@ -3,6 +3,7 @@ import CreateRecipe from '../../components/CreateRecipe/CreateRecipe';
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import "./Dashboard.css";
 
 
 //recipe creation -> title, image, ingrdients, instructions, tags, description
@@ -60,6 +61,7 @@ function Dashboard() {
   const [recipes, setRecipes] = useState<any[]>([]);
   const [editingR, setEditR] = useState<any | null>(null);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string>("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -71,6 +73,13 @@ function Dashboard() {
     }
     loadRecipes();
   }, []);
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => setSuccessMessage(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
 
   function loadRecipes() {
     axios.get("http://localhost:3000/api/recipes").then((res) => {
@@ -101,6 +110,7 @@ function Dashboard() {
         .then(() => {
           setEditR(null);
           loadRecipes();
+          setSuccessMessage("Recipe updated successfully!");
         })
         .catch((err) => {
           console.log("no update ", err);
@@ -111,6 +121,7 @@ function Dashboard() {
         .post(`http://localhost:3000/api/recipes`, payload, config)
         .then(() => {
           loadRecipes();
+          setSuccessMessage("Recipe created successfully!");
         })
         .catch((err) => {
           console.log("no creation: ", err);
@@ -132,6 +143,7 @@ function Dashboard() {
             setEditR(null);
           }
           loadRecipes();
+          setSuccessMessage("Recipe deleted successfully!");
         })
         .catch((err) => {
           console.log("didn't delete: ", err);
@@ -148,6 +160,8 @@ function Dashboard() {
       </Link>
       <h2>{editingR ? "Edit Recipe" : "Add Recipe"}</h2>
 
+      {successMessage && <p className="success-message">{successMessage}</p>}
+
       <RecipeForm handleSubmit={handleSave} initialData={editingR} buttonText={editingR ? "Update Recipe" : "Create Recipe"} />
       {editingR && (
         <button type="button" onClick={() => setEditR(null)}> Cancel Edit</button>
@@ -159,23 +173,25 @@ function Dashboard() {
       {myRecipes.length === 0 ? (
         <p>No recipes found in the database</p>
       ) : (
-        myRecipes.map((recipe) => {
-          const id = recipe._id || recipe.id;
-          return (
-            <CreateRecipe
-              key={id}
-              title={recipe.title}
-              description={recipe.description}
-              image={recipe.image}
-              tags={recipe.tags}
-              ingredients={recipe.ingredients}
-              instructions={recipe.instructions}
-              createdAt={recipe.createdAt}
-              onEdit={() => handleEdit(recipe)}
-              onDelete={() => handleDelete(id)}
-            />
-          );
-        })
+        <div className="recipe-grid">
+          {myRecipes.map((recipe) => {
+            const id = recipe._id || recipe.id;
+            return (
+              <CreateRecipe
+                key={id}
+                title={recipe.title}
+                description={recipe.description}
+                image={recipe.image}
+                tags={recipe.tags}
+                ingredients={recipe.ingredients}
+                instructions={recipe.instructions}
+                createdAt={recipe.createdAt}
+                onEdit={() => handleEdit(recipe)}
+                onDelete={() => handleDelete(id)}
+              />
+            );
+          })}
+        </div>
       )}
 
     </div>

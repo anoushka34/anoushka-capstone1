@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+.sub-page {
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.sub-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+.sub-heading {
+  font-size: 40px;
+  font-weight: 700;
+  color: #1B1B1B;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.sub-subheading {
+  font-size: 16px;
+  color: #707070;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.sub-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.sub-form .btn-primary {
+  align-self: flex-start;
+  margin-top: 16px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 20px;
+  background-color: #57852F;
+  color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sub-form .btn-primary:hover:not(:disabled) {
+  background-color: #6BA539;
+}
+
+.sub-form .btn-primary:disabled {
+  background-color: #B0B0B0;
+  cursor: not-allowed;
+}
+
+.sub-error {
+  color: #C62828;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.sub-loading {
+  color: #707070;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.sub-response-card {
+  background-color: #FFFFFF;
+  border: 1px solid #F5F5F5;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin-bottom: 32px;
+}
+
+.sub-response-tag {
+  display: inline-block;
+  background-color: #FBEABF;
+  color: #866208;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.sub-response-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1B1B1B;
+  margin: 0;
+}
+
+.sub-history-heading {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1B1B1B;
+  margin-bottom: 16px;
+}
+
+.sub-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sub-history-card {
+  background-color: #FFFFFF;
+  border: 1px solid #F5F5F5;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 16px 20px;
+}
+
+.sub-history-question {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1B1B1B;
+  margin: 0 0 6px 0;
+}
+
+.sub-history-answer {
+  font-size: 14px;
+  color: #707070;
+  line-height: 1.5;
+  margin: 0;
+}

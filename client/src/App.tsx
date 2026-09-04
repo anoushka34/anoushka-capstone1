@@ -5,6 +5,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./App.css";
 import LandingPage from "./pages/LandingPage/LandingPage";
+import SubstitutionFinder from "./pages/SubstitutionFinder/SubstitutionFinder";
 
 import AIAssitant from "./pages/AIAssistant/AIAssistant";
 import RecipePage from "./pages/RecipesPage/RecipesPage";
@@ -43,6 +44,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
         <Route path="/recipes/:id" element={<RecipeDetails />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/substitution-finder" element={<SubstitutionFinder />} />
       </Routes>
     </>
   );
