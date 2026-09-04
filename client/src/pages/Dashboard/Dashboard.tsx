@@ -170,6 +170,7 @@ function Dashboard() {
               tags={recipe.tags}
               ingredients={recipe.ingredients}
               instructions={recipe.instructions}
+              createdAt={recipe.createdAt}
               onEdit={() => handleEdit(recipe)}
               onDelete={() => handleDelete(id)}
             />
