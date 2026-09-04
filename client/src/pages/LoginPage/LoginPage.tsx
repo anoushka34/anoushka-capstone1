@@ -32,9 +32,9 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
 
       handleSignUpOrLogin();
       navigate("/dashboard");
-    } catch (err) {
-      console.log(err);
-      setError("check terminal and console");
+    } catch (err: any) {
+      console.log("Login fail", err);
+      setError(err.response?.data?.message || err.response?.data?.error || "invalid email or password");
     }
   }
 

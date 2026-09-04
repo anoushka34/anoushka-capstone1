@@ -6,6 +6,8 @@ import "./SignupPage.css";
 
 import { useNavigate } from "react-router-dom";
 
+import axios from "axios";
+
 
 type SignupPageProps = {
   handleSignUpOrLogin: () => void;
@@ -15,7 +17,6 @@ export default function SignUpPage({ handleSignUpOrLogin }: SignupPageProps) {
   const [error, setError] = useState("");
 
   const [state, setState] = useState({
-    username: "",
     email: "",
     password: "",
     passwordConf: "",
@@ -33,12 +34,29 @@ export default function SignUpPage({ handleSignUpOrLogin }: SignupPageProps) {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
+    if (state.password !== state.passwordConf) {
+      setError("Passwords do not match");
+      return;
+    }
+
     try {
+      console.log("Sending payload:", state);
+      const response = await axios.post("http://localhost:3000/api/users/signup", {
+        email: state.email.trim(),
+        password: state.password,
+      });
+
+      const token = response.data.token || response.data;
+      if (token) {
+        localStorage.setItem("token", token);
+      }
+
       handleSignUpOrLogin();
-      navigate("/");
+      navigate("/dashboard");
     } catch (err: any) {
-      console.log(err, " <- this comes from tht throw in utils/signup");
-      setError(err.message);
+      console.log("Signup error:", err);
+      console.log("Server said:", err.response?.data);
+      setError(err.response?.data?.message || err.response?.data?.error || "Signup failed");
     }
   }
 
@@ -52,14 +70,6 @@ export default function SignUpPage({ handleSignUpOrLogin }: SignupPageProps) {
           className="signup-form"
         >
           <div className="signup-segment">
-            <input
-              name="username"
-              placeholder="username"
-              value={state.username}
-              onChange={handleChange}
-              required
-              className="signup-input"
-            />
             <input
               type="email"
               name="email"

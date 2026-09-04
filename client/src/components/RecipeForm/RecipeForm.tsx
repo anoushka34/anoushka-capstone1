@@ -1,103 +1,126 @@
-//input handling for the recipe criteria
-//what needs to be included
-// title, image, ingrdients, instructions, tags, description
-//          required field validation, success message when submitted, UI should
-//          be updated without reload
-
 import { useState, useEffect } from 'react';
+import "./RecipeForm.css";
 
 type FormFields = {
-  title:string;
+  title: string;
   image: string;
-  ingredients:string;
-  instructions:string;
-  tags:string;
-  description:string;
+  ingredients: string;
+  instructions: string;
+  tags: string;
+  description: string;
 };
 
 type FormProps = {
-    handleSubmit: (recipeData: FormFields) => void;
-    initialData?: any;
-    buttonText?: string;
+  handleSubmit: (recipeData: FormFields) => void;
+  initialData?: any;
+  buttonText?: string;
 }
 
+function formatIngredients(ingredients: any): string {
+  if (!ingredients) return '';
+  if (typeof ingredients === 'string') return ingredients;
+  if (Array.isArray(ingredients)) {
+    return ingredients
+      .map((ing) => {
+        if (typeof ing === 'string') return ing;
+        return ing.quantity ? `${ing.name}, ${ing.quantity}` : ing.name;
+      })
+      .join('\n');
+  }
+  return '';
+}
 
-function RecipeForm({ handleSubmit, initialData, buttonText = "Create Recipe"}: FormProps) {
+function formatInstructions(instructions: any): string {
+  if (!instructions) return '';
+  if (typeof instructions === 'string') return instructions;
+  if (Array.isArray(instructions)) {
+    return instructions
+      .slice()
+      .sort((a, b) => (a.step || 0) - (b.step || 0))
+      .map((instr) => (typeof instr === 'string' ? instr : instr.description))
+      .join('\n');
+  }
+  return '';
+}
+
+function formatTags(tags: any): string {
+  if (!tags) return '';
+  if (typeof tags === 'string') return tags;
+  if (Array.isArray(tags)) return tags.join(', ');
+  return '';
+}
+
+function RecipeForm({ handleSubmit, initialData, buttonText = "Create Recipe" }: FormProps) {
   const [formData, setFormData] = useState<FormFields>({
-    title: '', 
-    description: '', 
+    title: '',
+    description: '',
     image: '',
-    ingredients: '', 
+    ingredients: '',
     instructions: '',
-    tags: '', 
-    
+    tags: '',
   });
 
-  useEffect (() => {
-    if(initialData) {
+  useEffect(() => {
+    if (initialData) {
       setFormData({
-        title:initialData.title || '', 
-        description: initialData.desctiption || '', 
-        image: initialData.image || '', 
-        ingredients : typeof initialData.ingredients == 'string' ? initialData.ingredients: JSON.stringify(initialData.ingredients || ''),
-        instructions : typeof initialData.instructions == 'string' ? initialData.instructions: JSON.stringify(initialData.instructions || ''),
-        tags : typeof initialData.tags == 'string' ? initialData.tags: JSON.stringify(initialData.tags || ''),
+        title: initialData.title || '',
+        description: initialData.description || '',
+        image: initialData.image || '',
+        ingredients: formatIngredients(initialData.ingredients),
+        instructions: formatInstructions(initialData.instructions),
+        tags: formatTags(initialData.tags),
       });
     }
-
     else {
       setFormData({
-        title: '', 
-        description: '', 
+        title: '',
+        description: '',
         image: '',
-        ingredients: '', 
+        ingredients: '',
         instructions: '',
-        tags: '', 
+        tags: '',
       });
     }
   }, [initialData]);
-  
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({...formData, [event.target.name]: event.target.value, })
+    setFormData({ ...formData, [event.target.name]: event.target.value, })
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleSubmit(formData);
     setFormData({
-        title: '', 
-        description: '', 
-        image: '',
-        ingredients: '', 
-        instructions: '',
-        tags: '', 
+      title: '',
+      description: '',
+      image: '',
+      ingredients: '',
+      instructions: '',
+      tags: '',
     });
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input type="text" name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
-      <br/>
+    <form className="recipe-form" onSubmit={onSubmit}>
+      <label className="form-label">Title</label>
+      <input className="form-input" type="text" name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
 
-      <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} required />
+      <label className="form-label">Description</label>
+      <textarea className="form-input" name="description" placeholder="Description" value={formData.description} onChange={handleChange} required />
 
-      <br/>
-      <input type="text" name="image" placeholder="Image URL" value={formData.image} onChange={handleChange} required />
+      <label className="form-label">Image URL</label>
+      <input className="form-input" type="text" name="image" placeholder="Image URL" value={formData.image} onChange={handleChange} required />
 
-      <br/>
+      <label className="form-label">Tags</label>
+      <input className="form-input" type="text" name="tags" placeholder="Tags" value={formData.tags} onChange={handleChange} required />
 
-      <input type="text" name="tags" placeholder="Tags" value={formData.tags} onChange={handleChange} required />
+      <label className="form-label">Ingredients</label>
+      <textarea className="form-input" name="ingredients" placeholder="Ingredients" value={formData.ingredients} onChange={handleChange} required />
 
-      <br/>
+      <label className="form-label">Instructions</label>
+      <textarea className="form-input" name="instructions" placeholder="Instructions" value={formData.instructions} onChange={handleChange} required />
 
-      <textarea name="ingredients" placeholder="Ingredients" value={formData.ingredients} onChange={handleChange} required />
-
-      <br/>
-
-      <textarea name="instructions" placeholder="Instructions" value={formData.instructions} onChange={handleChange} required />
-      <br/>
-
-      <button type="submit">Create Recipe</button>
+      <button type="submit" className="btn-primary">{buttonText}</button>
     </form>
   );
 }

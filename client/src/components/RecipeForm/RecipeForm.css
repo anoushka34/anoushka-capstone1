@@ -1,40 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
-.signup-page {
+.recipe-form {
   font-family: 'Open Sans', sans-serif;
   display: flex;
-  justify-content: center;
-  padding-top: 60px;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-.signup-form-container {
-  background-color: #FFFFFF;
-  padding: 32px;
-  border-radius: 12px;
-  border: 1px solid #F5F5F5;
-  width: 320px;
-}
-
-.signup-header {
-  font-size: 20px;
+.form-label {
+  display: block;
+  font-size: 14px;
   font-weight: 600;
   color: #1B1B1B;
-  margin-bottom: 20px;
-  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 4px;
 }
 
-.signup-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.signup-segment {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.signup-input {
+.form-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   padding: 10px 12px;
@@ -43,22 +29,23 @@
   outline: none;
 }
 
-.signup-input:focus {
+.form-input:focus {
   border-color: #57852F;
 }
 
-.signup-btn {
-  margin-top: 12px;
-  padding: 10px;
+.btn-primary {
+  margin-top: 20px;
+  padding: 10px 20px;
   border: none;
   border-radius: 20px;
   background-color: #57852F;
   color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
 }
 
-.signup-btn:hover {
+.btn-primary:hover {
   background-color: #6BA539;
 }
