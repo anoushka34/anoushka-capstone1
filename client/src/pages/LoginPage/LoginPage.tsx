@@ -5,6 +5,7 @@ import "./LoginPage.css";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 type LoginPageProps = {
@@ -25,6 +26,10 @@ export default function LoginPage({ handleSignUpOrLogin }: LoginPageProps) {
     e.preventDefault();
 
     try {
+      const response = await axios.post("http://localhost:3000/api/users/login", state);
+      const token = response.data.token || response.data;
+      localStorage.setItem("token", token);
+
       handleSignUpOrLogin();
       navigate("/dashboard");
     } catch (err) {
