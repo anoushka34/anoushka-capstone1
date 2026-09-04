@@ -19,10 +19,10 @@ function Dashboard() {
 
     useEffect(() => {
         loadRecipes();
-    } []);
+    }, []);
 
     function loadRecipes() {
-        axios.get("http://localhot:3000/api/recipes").then((res)=> {
+        axios.get("http://localhost:3000/api/recipes").then((res)=> {
             setRecipes(res.data);
         })
         .catch((err)=> {
