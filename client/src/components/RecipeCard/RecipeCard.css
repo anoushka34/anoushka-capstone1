@@ -6,10 +6,12 @@
   border: 1px solid #F5F5F5;
   border-radius: 12px;
   overflow: hidden;
-  width: 260px;
+  width: 100%;
+  max-width: 280px;
   margin: 12px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
   padding-bottom: 12px;
+  box-sizing: border-box;
 }
 
 .card .image {
@@ -42,4 +44,11 @@
   margin: 0 16px;
   padding: 4px 10px;
   border-radius: 12px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    max-width: 100%;
+    margin: 12px 0;
+  }
 }

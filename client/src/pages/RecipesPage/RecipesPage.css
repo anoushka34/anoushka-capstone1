@@ -1,47 +1,53 @@
 .recipes-page {
-    font-family: 'Open Sans';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #FFFF;
+  font-family: 'Open Sans';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFF;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .recipes-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
 }
 
 
 .recipes-home {
-    font-size: 24px;
-    color: #1b1b1b;
-    align-items: center;
+  font-size: 24px;
+  color: #1b1b1b;
+  align-items: center;
 }
 
 .recipe-search {
-    font-size: 16px;
-    color: #707070;
-}
-
-.recipe-search {
-    margin-bottom: 20px;
-    width:100%;
+  font-size: 16px;
+  color: #707070;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .search-input {
-    font-family: 'Open Sans';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #FFFF;
+  font-family: 'Open Sans';
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #B0B0B0;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #FFFF;
 }
 
 .recipe-cards {
-    display:grid;
-}
-
-.recipe-grid-temp {
-    font-size:14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  gap: 12px;
 }
