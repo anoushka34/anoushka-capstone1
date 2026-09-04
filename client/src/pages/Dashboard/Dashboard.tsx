@@ -31,27 +31,29 @@ function Dashboard() {
     }
 
     const handleSave=(recipeData:any) => {
+        const token = localStorage.getItem("token");
+        const config = {headers: {Authorizaton: `Bearer ${token}`}};
         if(editingR)  {
             const id= editingR._id || editingR.id;
             axios
-            .put(`http://localhost:3000/api/recipes/${id}`, recipeData)
-            .then(()=> {
-                setEditR(null); 
-                loadRecipes();
-            })
-            .catch((err)=> {
-                console.log("no update ", err);
-            });
+                .put(`http://localhost:3000/api/recipes/${id}`, recipeData)
+                .then(()=> {
+                    setEditR(null); 
+                    loadRecipes();
+                })
+                .catch((err)=> {
+                    console.log("no update ", err);
+                });
         }
         else {
             axios
-            .post(`http://localhost:3000/api/recipes`, recipeData)
-            .then(() => {
-                loadRecipes();
-            })
-            .catch((err)=> {
-                console.log("no creation: ", err);
-            }); 
+                .post(`http://localhost:3000/api/recipes`, recipeData)
+                .then(() => {
+                    loadRecipes();
+                })
+                .catch((err)=> {
+                    console.log("no creation: ", err);
+                }); 
         }
     
     };
@@ -62,16 +64,18 @@ function Dashboard() {
 
     const handleDelete = (id: string) => {
         if(window.confirm("Delete this recipe?")) {
+            const token = localStorage.getItem("token");
+            const config = {headers: {Authorizaton: `Bearer ${token}`}};
             axios.delete(`http://localhost:3000/api/recipes/${id}`)
-            .then(()=> {
-                if(editingR && (editingR._id == id || editingR.id == id)) {
-                    setEditR(null);
-                }
-                loadRecipes();
-            })
-            .catch((err)=> {
-                console.log("didn't delete: ", err);
-            });
+                .then(()=> {
+                    if(editingR && (editingR._id == id || editingR.id == id)) {
+                        setEditR(null);
+                    }
+                    loadRecipes();
+                })
+                .catch((err)=> {
+                    console.log("didn't delete: ", err);
+                });
         }
     };
 
